@@ -1,6 +1,10 @@
 # Copyright (c) 2013-2015 Siphon Contributors.
 # Distributed under the terms of the BSD 3-Clause License.
 # SPDX-License-Identifier: BSD-3-Clause
+
+#Edit by jagular1785, 01/23/2020
+#Altering to add in ThetaV values when downloading from Wyoming sites
+
 """Read upper air data from the Wyoming archives."""
 
 from datetime import datetime
