@@ -69,8 +69,8 @@ class WyomingUpperAir(HTTPEndPoint):
         raw_data = self._get_data_raw(time, site_id)
         soup = BeautifulSoup(raw_data, 'html.parser')
         tabular_data = StringIO(soup.find_all('pre')[0].contents[0])
-        col_names = ['pressure', 'height', 'temperature', 'dewpoint', 'direction', 'speed']
-        df = pd.read_fwf(tabular_data, skiprows=5, usecols=[0, 1, 2, 3, 6, 7], names=col_names)
+        col_names = ['pressure', 'height', 'temperature', 'dewpoint', 'direction', 'speed' , 'thetav']
+        df = pd.read_fwf(tabular_data, skiprows=5, usecols=[0, 1, 2, 3, 6, 7, 10], names=col_names)
         df['u_wind'], df['v_wind'] = get_wind_components(df['speed'],
                                                          np.deg2rad(df['direction']))
 
@@ -115,7 +115,8 @@ class WyomingUpperAir(HTTPEndPoint):
                     'time': None,
                     'latitude': 'degrees',
                     'longitude': 'degrees',
-                    'elevation': 'meter'}
+                    'elevation': 'meter',
+                    'thetav': 'degK' }
         return df
 
     def _get_data_raw(self, time, site_id):
